@@ -1,3 +1,3 @@
-export const automateProject (){
-    // initialize a sample function
-}
+export const automateProject = () => {
+  // initialize a sample function
+};
