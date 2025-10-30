@@ -46,10 +46,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-app .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/devops-app
 
 #   deploy:
 #     needs: docker
