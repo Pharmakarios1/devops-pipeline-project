@@ -11,5 +11,5 @@ RUN npm install
 COPY . .
 
 # Expose and start
-EXPOSE 3000
-CMD ["npm", "start"]
+EXPOSE 5173
+CMD ["npm", "run", "dev"]

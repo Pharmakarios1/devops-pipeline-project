@@ -32,7 +32,6 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
-    environment: env-pipeline
 
     steps:
       - name: Checkout repository
