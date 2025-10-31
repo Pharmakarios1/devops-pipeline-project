@@ -46,7 +46,7 @@ jobs:
 
     
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest -f medicine-pos/Dockerfile medicine-pos
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest -f medicine-pos/Dockerfile .
 
 
       - name: Push Docker image
