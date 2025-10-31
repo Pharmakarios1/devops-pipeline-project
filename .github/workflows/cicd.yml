@@ -49,7 +49,7 @@ jobs:
         run: docker build -t medicine-pos:latest -f medicine-pos/Dockerfile .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/devops-app
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest
 
   # deploy:
   #   needs: docker
