@@ -8,6 +8,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 permissions:
   contents: read
   packages: write
@@ -26,15 +27,11 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
-
-    #   - name: Run tests
-    #     run: npm test
+        run: cd medicine-pos && npm install
 
   docker:
     needs: build
     runs-on: ubuntu-latest
-    environment: env-pipeline
 
     steps:
       - name: Checkout repository
@@ -47,24 +44,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest -f medicine-pos/Dockerfile .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest -f medicine-pos/Dockerfile medicine-pos
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/medicine-pos:latest
-
-  # deploy:
-  #   needs: docker
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Deploy to EC2
-  #       uses: appleboy/ssh-action@v1.0.0
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ubuntu
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: |
-  #           docker pull ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
-  #           docker stop devops-app || true
-  #           docker rm devops-app || true
-  #           docker run -d -p 80:3000 --name devops-app ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
